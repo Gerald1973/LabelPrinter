@@ -6,6 +6,9 @@ public class SchoolModel {
 	private String firstName;
 	private String course;
 	private String room;
+	private String cancel;
+	private String insert;
+	private String browse;
 
 	public String getShellTitle() {
 		return shellTitle;
@@ -46,4 +49,30 @@ public class SchoolModel {
 	public void setRoom(String room) {
 		this.room = room;
 	}
+
+	public String getCancel() {
+		return cancel;
+	}
+
+	public void setCancel(String cancel) {
+		this.cancel = cancel;
+	}
+
+	public String getInsert() {
+		return insert;
+	}
+
+	public void setInsert(String insert) {
+		this.insert = insert;
+	}
+
+	public String getBrowse() {
+		return browse;
+	}
+
+	public void setBrowse(String browse) {
+		this.browse = browse;
+	}
+	
+	
 }

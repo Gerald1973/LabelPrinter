@@ -12,6 +12,7 @@ public class SchoolController {
 	public SchoolController(){
 		initModel();
 		schoolFrame = new SchoolFrame(schoolModel);
+		schoolFrame.setVisible(true);
 	}
 	
 	private void initModel() {
@@ -21,5 +22,8 @@ public class SchoolController {
 		schoolModel.setFirstName(I18NUtils.INSTANCE.getResourceBundle().getString("school.first.name"));
 		schoolModel.setRoom(I18NUtils.INSTANCE.getResourceBundle().getString("school.room"));
 		schoolModel.setShellTitle(I18NUtils.INSTANCE.getResourceBundle().getString("school.shell.title"));
+		schoolModel.setCancel(I18NUtils.INSTANCE.getResourceBundle().getString("school.cancel"));
+		schoolModel.setInsert(I18NUtils.INSTANCE.getResourceBundle().getString("school.insert"));
+		schoolModel.setBrowse(I18NUtils.INSTANCE.getResourceBundle().getString("school.browse"));
  	}
 }
