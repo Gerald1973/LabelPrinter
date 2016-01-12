@@ -10,21 +10,30 @@
 		<swt.version>4.5.1</swt.version>
 	</properties>
 
+
 	<repositories>
 		<repository>
 			<id>maven-eclipse-repo</id>
 			<url>http://maven-eclipse.github.io/maven</url>
 		</repository>
 	</repositories>
-	<dependencies>
-		<dependency>
-			<groupId>org.eclipse.swt</groupId>
-			<artifactId>org.eclipse.swt.win32.win32.x86</artifactId>
-			<version>${swt.version}</version>
-			<!-- To use the debug jar, add this -->
-			<classifier>debug</classifier>
-		</dependency>
-	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.eclipse.swt</groupId>
+				<artifactId>org.eclipse.swt.win32.win32.x86</artifactId>
+				<version>${swt.version}</version>
+				<!-- To use the debug jar, add this -->
+				<classifier>debug</classifier>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.swt</groupId>
+				<artifactId>org.eclipse.swt.win32.win32.x86_64</artifactId>
+				<version>${swt.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -35,7 +44,55 @@
 					<downloadJavadocs>true</downloadJavadocs>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>com.smilesmile1973.RunMe</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.4.3</version>
+				<configuration>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
-
+	<profiles>
+		<profile>
+			<id>profile_32</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.eclipse.swt</groupId>
+					<artifactId>org.eclipse.swt.win32.win32.x86</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>profile_64</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.eclipse.swt</groupId>
+					<artifactId>org.eclipse.swt.win32.win32.x86_64</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
 </project>

@@ -2,7 +2,9 @@ package com.smilesmile1973.controller;
 
 import org.eclipse.swt.ole.win32.Variant;
 
+import com.smilesmile1973.controller.school.SchoolController;
 import com.smilesmile1973.view.MainShell;
+import com.smilesmile1973.view.school.SchoolFrame;
 
 public class MainController {
 	private Variant variantApplication;
@@ -31,5 +33,9 @@ public class MainController {
 
 	public void setMainShell(MainShell mainShell) {
 		this.mainShell = mainShell;
+	}
+
+	public void openSchoolFrame() {
+		new SchoolController();
 	}
 }
