@@ -24,5 +24,10 @@ public class Window extends AbstractOleWordObject<Document>{
 		}
 		return results;
 	}
+	
+	public Selection getSelection(){
+		Variant tmp = OleUtils.INSTANCE.getProperty(getMyVariant().getAutomation(), "Selection");
+		return new Selection(this, tmp);
+	}
 
 }

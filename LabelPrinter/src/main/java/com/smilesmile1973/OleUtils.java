@@ -8,11 +8,11 @@ import org.eclipse.swt.ole.win32.Variant;
 public enum OleUtils {
 	INSTANCE;
 
-	public Variant getWordApplication(OleClientSite clientSite){
+	public Variant getWordApplication(OleClientSite clientSite) {
 		OleAutomation oleAutomation = new OleAutomation(clientSite);
 		return getProperty(oleAutomation, "Application");
 	}
-	
+
 	public Variant getProperty(OleAutomation ole, String propertyName) {
 		Variant result;
 		String[] propertyNames = new String[1];
@@ -22,6 +22,17 @@ public enum OleUtils {
 			result = null;
 		} else {
 			result = ole.getProperty(tmpPropertyId[0]);
+		}
+		return result;
+	}
+
+	public boolean setProperty(OleAutomation ole, String propertyName, Variant value) {
+		boolean result = false;
+		String[] propertyNames = new String[1];
+		propertyNames[0] = propertyName;
+		int[] tmpPropertyId = ole.getIDsOfNames(propertyNames);
+		if (tmpPropertyId != null) {
+			result = ole.setProperty(tmpPropertyId[0], value);
 		}
 		return result;
 	}
@@ -54,5 +65,5 @@ public enum OleUtils {
 			System.out.println(ole.getFunctionDescription(i).name);
 		}
 	}
-	
+
 }

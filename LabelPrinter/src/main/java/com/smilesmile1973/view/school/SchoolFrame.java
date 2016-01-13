@@ -20,4 +20,12 @@ public class SchoolFrame {
 	public void setVisible(boolean isVisible){
 		shell.setVisible(isVisible);
 	}
+
+	public MainPanel getMainPanel() {
+		return mainPanel;
+	}
+	
+	public void dispose(){
+		shell.dispose();
+	}
 }

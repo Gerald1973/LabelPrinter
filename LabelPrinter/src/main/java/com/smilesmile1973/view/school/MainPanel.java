@@ -6,6 +6,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 
 import com.smilesmile1973.model.school.SchoolModel;
@@ -47,35 +48,29 @@ public class MainPanel extends Composite {
 		Composite composite = new Composite(this, SWT.NONE);
 		composite.setLayoutData(compositeLayout);
 		composite.setLayout(new GridLayout(2, false));
-		GridData txtLayout = new GridData();
-		txtLayout.widthHint = 200;
-		txtLayout.horizontalAlignment = SWT.FILL;
-		GridData labelLayout = new GridData();
-		labelLayout.horizontalAlignment = SWT.RIGHT;
 		// Firstname
 		labelFirstName = new Label(composite, SWT.NONE);
 		labelFirstName.setText(model.getFirstName());
 		inputFirstName = new Text(composite, SWT.SINGLE);
-		inputFirstName.setLayoutData(txtLayout);
-		inputFirstName.setText("...!!");
+		inputFirstName.setLayoutData(buildTxtLayoutData());
 		// familyname
 		labelFamilyName = new Label(composite, SWT.NONE);
-		labelFamilyName.setLayoutData(labelLayout);
+		labelFamilyName.setLayoutData(new GridData(SWT.RIGHT));
 		labelFamilyName.setText(model.getFamilyName());
 		inputFamilyName = new Text(composite, SWT.NONE);
-		inputFamilyName.setLayoutData(txtLayout);
+		inputFamilyName.setLayoutData(buildTxtLayoutData());
 		// course
 		labelCourse = new Label(composite, SWT.NONE);
 		labelCourse.setText(model.getCourse());
-		labelCourse.setLayoutData(labelLayout);
+		labelCourse.setLayoutData(new GridData(SWT.RIGHT));
 		inputCourse = new Text(composite, SWT.NONE);
-		inputCourse.setLayoutData(txtLayout);
+		inputCourse.setLayoutData(buildTxtLayoutData());
 		// class
 		labelClass = new Label(composite, SWT.NONE);
-		labelClass.setLayoutData(labelLayout);
+		labelClass.setLayoutData(new GridData(SWT.RIGHT));
 		labelClass.setText(model.getRoom());
 		inputClass = new Text(composite, SWT.NONE);
-		inputClass.setLayoutData(txtLayout);
+		inputClass.setLayoutData(buildTxtLayoutData());
 		// CancelButton
 		GridData cancelButtonGridData = new GridData();
 		cancelButtonGridData.horizontalAlignment = SWT.LEFT;
@@ -90,6 +85,21 @@ public class MainPanel extends Composite {
 		insertButton = new Button(this, SWT.NONE);
 		insertButton.setText(model.getInsert());
 		insertButton.setLayoutData(insertButtonGridData);
+	}
+	
+	public void addInsertButtonListener(Listener listener){
+		insertButton.addListener(SWT.Selection, listener);
+	}
+	
+	public void addCancelButtonListener(Listener listener){
+		cancelButton.addListener(SWT.Selection, listener);
+	}
+	
+	private GridData buildTxtLayoutData(){
+		GridData result = new GridData();
+		result.widthHint=200;
+		result.horizontalAlignment=SWT.FILL;
+		return result;
 	}
 
 }

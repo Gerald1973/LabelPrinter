@@ -16,4 +16,9 @@ public class Document extends AbstractOleWordObject<Word> {
 		result = name.getString();
 		return result;
 	}
+
+	public Window getActiveWindow() {
+		Variant tmp = OleUtils.INSTANCE.getProperty(getMyVariant().getAutomation(), "ActiveWindow");
+		return new Window(this, tmp);
+	}
 }

@@ -24,4 +24,9 @@ public class Pane extends AbstractOleWordObject<Window>{
 		}
 		return results;
 	}
+	
+	public Selection getSelection(){
+		Variant tmp = OleUtils.INSTANCE.getProperty(getMyVariant().getAutomation(), "Selection");
+		return new Selection(this.getParent(), tmp);
+	}
 }
