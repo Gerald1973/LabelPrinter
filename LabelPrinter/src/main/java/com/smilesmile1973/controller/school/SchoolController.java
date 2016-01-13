@@ -39,13 +39,13 @@ public class SchoolController {
 
 	private void initModel() {
 		schoolModel = new SchoolModel();
-		schoolModel.setCourse(I18NUtils.INSTANCE.getResourceBundle().getString("school.course"));
-		schoolModel.setFamilyName(I18NUtils.INSTANCE.getResourceBundle().getString("school.family.name"));
-		schoolModel.setFirstName(I18NUtils.INSTANCE.getResourceBundle().getString("school.first.name"));
-		schoolModel.setRoom(I18NUtils.INSTANCE.getResourceBundle().getString("school.room"));
-		schoolModel.setShellTitle(I18NUtils.INSTANCE.getResourceBundle().getString("school.shell.title"));
-		schoolModel.setCancel(I18NUtils.INSTANCE.getResourceBundle().getString("school.cancel"));
-		schoolModel.setInsert(I18NUtils.INSTANCE.getResourceBundle().getString("school.insert"));
-		schoolModel.setBrowse(I18NUtils.INSTANCE.getResourceBundle().getString("school.browse"));
+		schoolModel.setCourse(I18NUtils.INSTANCE.getString("school.course"));
+		schoolModel.setFamilyName(I18NUtils.INSTANCE.getString("school.family.name"));
+		schoolModel.setFirstName(I18NUtils.INSTANCE.getString("school.first.name"));
+		schoolModel.setRoom(I18NUtils.INSTANCE.getString("school.room"));
+		schoolModel.setShellTitle(I18NUtils.INSTANCE.getString("school.shell.title"));
+		schoolModel.setCancel(I18NUtils.INSTANCE.getString("school.cancel"));
+		schoolModel.setInsert(I18NUtils.INSTANCE.getString("school.insert"));
+		schoolModel.setBrowse(I18NUtils.INSTANCE.getString("school.browse"));
 	}
 }
