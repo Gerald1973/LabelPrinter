@@ -25,6 +25,7 @@ public class SchoolController {
 		schoolFrame.getMainPanel().addInsertButtonListener(new Listener() {
 			public void handleEvent(Event event) {
 				mainController.getWord().getActiveDocument().getActiveWindow().getSelection().setText("TTTT");
+				mainController.getWord().getActiveDocument().addTable(10, 5);
 			}
 		});
 

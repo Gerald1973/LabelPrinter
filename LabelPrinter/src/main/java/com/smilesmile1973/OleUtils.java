@@ -54,7 +54,7 @@ public enum OleUtils {
 		String[] methodNames = new String[1];
 		methodNames[0] = methodName;
 		int[] methodIds = ole.getIDsOfNames(methodNames);
-		result = ole.invoke(methodIds[0]);
+		result = ole.invoke(methodIds[0],variants);
 		return result;
 	}
 
