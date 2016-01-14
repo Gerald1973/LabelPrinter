@@ -40,5 +40,7 @@ public class Table extends AbstractOleWordObject<Document> {
 		tmps = OleUtils.INSTANCE.buildArrayOfVariant(heightInPoint, Constants.WDROWHEIGHTEXACTLY);
 		OleUtils.INSTANCE.executeMethod(cell.getAutomation(), "SetHeight", tmps);
 	}
+	
+	
 
 }
