@@ -34,4 +34,19 @@ public class Document extends AbstractOleWordObject<Word> {
 		tableVariants[2] = new Variant(numberOfColumn);
 		OleUtils.INSTANCE.executeMethod(tables.getAutomation(), "Add", tableVariants);
 	}
+
+	/**
+	 * This method returns a table in the document.
+	 * 
+	 * @param index
+	 *            based on 1.
+	 * @return a table in the document.
+	 */
+	public Table getTable(int index) {
+		Table result = null;
+		Variant tables = OleUtils.INSTANCE.getProperty(getMyVariant().getAutomation(), "Tables");
+		Variant table = OleUtils.INSTANCE.getElementInCollection(tables.getAutomation(), index);
+		result = new Table(this, table);
+		return result;
+	}
 }

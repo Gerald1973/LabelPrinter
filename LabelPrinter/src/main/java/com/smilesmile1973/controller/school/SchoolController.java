@@ -6,6 +6,7 @@ import org.eclipse.swt.widgets.Listener;
 import com.smilesmile1973.I18NUtils;
 import com.smilesmile1973.controller.MainController;
 import com.smilesmile1973.model.school.SchoolModel;
+import com.smilesmile1973.ms.word.Table;
 import com.smilesmile1973.view.school.SchoolFrame;
 
 public class SchoolController {
@@ -26,6 +27,8 @@ public class SchoolController {
 			public void handleEvent(Event event) {
 				mainController.getWord().getActiveDocument().getActiveWindow().getSelection().setText("TTTT");
 				mainController.getWord().getActiveDocument().addTable(10, 5);
+				Table table = mainController.getWord().getActiveDocument().getTable(1);
+				table.setSizeOfCell(1, 1, 5f, 5f);
 			}
 		});
 
