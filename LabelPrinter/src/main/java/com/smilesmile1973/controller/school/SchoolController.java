@@ -3,6 +3,7 @@ package com.smilesmile1973.controller.school;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
+import com.smilesmile1973.Constants;
 import com.smilesmile1973.I18NUtils;
 import com.smilesmile1973.controller.MainController;
 import com.smilesmile1973.model.school.SchoolModel;
@@ -29,6 +30,8 @@ public class SchoolController {
 				mainController.getWord().getActiveDocument().addTable(10, 5);
 				Table table = mainController.getWord().getActiveDocument().getTable(1);
 				table.setSizeOfCell(1, 1, 5f, 5f);
+				int borderToDisplay = Constants.BORDERBOTTOM | Constants.BORDERLEFT | Constants.BORDERRIGHT | Constants.BORDERTOP;
+				table.setBorderCell(1, 1, Constants.WDLINESTYLESINGLE, Constants.WDLINEWIDTH025PT,borderToDisplay);
 			}
 		});
 
