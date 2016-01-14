@@ -41,12 +41,26 @@ public class Document extends AbstractOleWordObject<Word> {
 	 * @param index
 	 *            based on 1.
 	 * @return a table in the document.
+	 * @author marechal
 	 */
 	public Table getTable(int index) {
 		Table result = null;
 		Variant tables = OleUtils.INSTANCE.getProperty(getMyVariant().getAutomation(), "Tables");
 		Variant table = OleUtils.INSTANCE.getElementInCollection(tables.getAutomation(), index);
 		result = new Table(this, table);
+		return result;
+	}
+
+	/**
+	 * This method returns the {@link PageSetup} of the document.
+	 * 
+	 * @return the {@link PageSetup} of the document.
+	 * @author marechal
+	 */
+	public PageSetup getPageSetup() {
+		PageSetup result = null;
+		Variant tmp = OleUtils.INSTANCE.getProperty(getMyVariant().getAutomation(), "PageSetup");
+		result = new PageSetup(this, tmp);
 		return result;
 	}
 }

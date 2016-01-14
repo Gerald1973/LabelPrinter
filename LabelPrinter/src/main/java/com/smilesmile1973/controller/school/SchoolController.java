@@ -26,12 +26,14 @@ public class SchoolController {
 	private void initListeners() {
 		schoolFrame.getMainPanel().addInsertButtonListener(new Listener() {
 			public void handleEvent(Event event) {
+				mainController.getWord().getActiveDocument().getPageSetup().setPaperSize(Constants.WDPAPERA4);
 				mainController.getWord().getActiveDocument().getActiveWindow().getSelection().setText("TTTT");
 				mainController.getWord().getActiveDocument().addTable(10, 5);
 				Table table = mainController.getWord().getActiveDocument().getTable(1);
 				table.setSizeOfCell(1, 1, 5f, 5f);
 				int borderToDisplay = Constants.BORDERBOTTOM | Constants.BORDERLEFT | Constants.BORDERRIGHT | Constants.BORDERTOP;
 				table.setBorderCell(1, 1, Constants.WDLINESTYLESINGLE, Constants.WDLINEWIDTH025PT,borderToDisplay);
+				
 			}
 		});
 

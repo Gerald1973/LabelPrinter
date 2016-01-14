@@ -6,6 +6,11 @@ import com.smilesmile1973.Constants;
 import com.smilesmile1973.ConversionUtils;
 import com.smilesmile1973.OleUtils;
 
+/**
+ * This class represents a Table in a Word document.
+ * @author marechal
+ *
+ */
 public class Table extends AbstractOleWordObject<Document> {
 
 	Table(Document parent, Variant myVariant) {
