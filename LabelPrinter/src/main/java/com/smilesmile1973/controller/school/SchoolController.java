@@ -6,7 +6,11 @@ import org.eclipse.swt.widgets.Listener;
 import com.smilesmile1973.Constants;
 import com.smilesmile1973.I18NUtils;
 import com.smilesmile1973.controller.MainController;
+import com.smilesmile1973.label.PageLabel;
+import com.smilesmile1973.label.StickLabel;
 import com.smilesmile1973.model.school.SchoolModel;
+import com.smilesmile1973.ms.word.Document;
+import com.smilesmile1973.ms.word.PageSetup;
 import com.smilesmile1973.ms.word.Table;
 import com.smilesmile1973.view.school.SchoolFrame;
 
@@ -26,14 +30,25 @@ public class SchoolController {
 	private void initListeners() {
 		schoolFrame.getMainPanel().addInsertButtonListener(new Listener() {
 			public void handleEvent(Event event) {
-				mainController.getWord().getActiveDocument().getPageSetup().setPaperSize(Constants.WDPAPERA4);
-				mainController.getWord().getActiveDocument().getActiveWindow().getSelection().setText("TTTT");
-				mainController.getWord().getActiveDocument().addTable(10, 5);
-				Table table = mainController.getWord().getActiveDocument().getTable(1);
-				table.setSizeOfCell(1, 1, 5f, 5f);
-				int borderToDisplay = Constants.BORDERBOTTOM | Constants.BORDERLEFT | Constants.BORDERRIGHT | Constants.BORDERTOP;
-				table.setBorderCell(1, 1, Constants.WDLINESTYLESINGLE, Constants.WDLINEWIDTH025PT,borderToDisplay);
-				
+				Document document = mainController.getWord().getActiveDocument();
+				PageSetup pageSetup = document.getPageSetup();
+				pageSetup.setTopMargin(0);
+				pageSetup.setRightMargin(0);
+				pageSetup.setBottomMargin(0);
+				pageSetup.setLeftMargin(0);
+				StickLabel stickLabel = new StickLabel(6.35f, 3.81f);
+				PageLabel pageLabel = new PageLabel(pageSetup.getPageWidth(), pageSetup.getHeight(), 0, 0, 0, 0,
+						stickLabel);
+				document.addTable(pageLabel.getNumberOfRows(), pageLabel.getNumberOfColumns());
+				Table table = document.getTable(1);
+				int border = Constants.BORDERBOTTOM | Constants.BORDERRIGHT | Constants.BORDERBOTTOM
+						| Constants.BORDERLEFT;
+				for (int y = 0; y < pageLabel.getNumberOfRows(); y++) {
+					for (int x = 0; x < pageLabel.getNumberOfColumns(); x++) {
+						table.setSizeOfCell(y+1, x+1, pageLabel.getCellDimensions()[y][x].getWidth(),
+								pageLabel.getCellDimensions()[y][x].getHeight());
+					}
+				}
 			}
 		});
 

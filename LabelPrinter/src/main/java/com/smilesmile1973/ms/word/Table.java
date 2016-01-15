@@ -8,6 +8,7 @@ import com.smilesmile1973.OleUtils;
 
 /**
  * This class represents a Table in a Word document.
+ * 
  * @author marechal
  *
  */
@@ -31,15 +32,15 @@ public class Table extends AbstractOleWordObject<Document> {
 	 * @param width
 	 *            the new width of the cell in cm.
 	 */
-	public void setSizeOfCell(int row, int column, float height, float width) {
+	public void setSizeOfCell(int row, int column, float width, float height) {
 		// 1. Transform the centimeter to point
 		int widthInPoint = ConversionUtils.INSTANCE.cmToPoint(width);
-		int heightInPoint = ConversionUtils.INSTANCE.cmToPoint(width);
+		int heightInPoint = ConversionUtils.INSTANCE.cmToPoint(height);
 		// 2. apply the new size to the selected cell
 		Variant[] tmps = OleUtils.INSTANCE.buildArrayOfVariant(row, column);
 		Variant cell = OleUtils.INSTANCE.executeMethod(getMyVariant().getAutomation(), "Cell", tmps);
 		// 2.1 Set the width
-		tmps = OleUtils.INSTANCE.buildArrayOfVariant(widthInPoint, Constants.WDADJUSTSAMEWIDTH);
+		tmps = OleUtils.INSTANCE.buildArrayOfVariant(widthInPoint, Constants.WDADJUSTNONE);
 		OleUtils.INSTANCE.executeMethod(cell.getAutomation(), "SetWidth", tmps);
 		// 2.2 Set the height
 		tmps = OleUtils.INSTANCE.buildArrayOfVariant(heightInPoint, Constants.WDROWHEIGHTEXACTLY);

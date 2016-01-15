@@ -8,6 +8,7 @@
 	<description>SWT Learning</description>
 	<properties>
 		<swt.version>4.5.1</swt.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 
