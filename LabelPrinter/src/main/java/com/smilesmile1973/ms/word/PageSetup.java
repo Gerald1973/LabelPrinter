@@ -1,6 +1,5 @@
 package com.smilesmile1973.ms.word;
 
-import org.eclipse.swt.ole.win32.OLE;
 import org.eclipse.swt.ole.win32.Variant;
 
 import com.smilesmile1973.ConversionUtils;

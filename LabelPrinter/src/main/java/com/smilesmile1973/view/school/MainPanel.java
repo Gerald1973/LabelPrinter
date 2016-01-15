@@ -102,4 +102,20 @@ public class MainPanel extends Composite {
 		return result;
 	}
 
+	public String getCourseValue() {
+		return inputCourse.getText();
+	}
+
+	public String getFirstNameValue() {
+		return inputFirstName.getText();
+	}
+
+	public String getFamilyNameValue() {
+		return inputFamilyName.getText();
+	}
+
+	public String getRoomValue() {
+		return inputClass.getText();
+	}
+
 }

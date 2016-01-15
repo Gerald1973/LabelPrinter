@@ -9,6 +9,7 @@ import com.smilesmile1973.controller.MainController;
 import com.smilesmile1973.label.PageLabel;
 import com.smilesmile1973.label.StickLabel;
 import com.smilesmile1973.model.school.SchoolModel;
+import com.smilesmile1973.model.school.SchoolVO;
 import com.smilesmile1973.ms.word.Document;
 import com.smilesmile1973.ms.word.PageSetup;
 import com.smilesmile1973.ms.word.Table;
@@ -30,6 +31,11 @@ public class SchoolController {
 	private void initListeners() {
 		schoolFrame.getMainPanel().addInsertButtonListener(new Listener() {
 			public void handleEvent(Event event) {
+				SchoolVO schoolVO = new SchoolVO();
+				schoolVO.setCourse(schoolFrame.getCourseValue());
+				schoolVO.setFirstName(schoolFrame.getFirstNameValue());
+				schoolVO.setName(schoolFrame.getFamilyNameValue());
+				schoolVO.setRoom(schoolFrame.getRoomValue());
 				Document document = mainController.getWord().getActiveDocument();
 				PageSetup pageSetup = document.getPageSetup();
 				pageSetup.setTopMargin(0);
@@ -48,6 +54,9 @@ public class SchoolController {
 						table.setSizeOfCell(y+1, x+1, pageLabel.getCellDimensions()[y][x].getWidth(),
 								pageLabel.getCellDimensions()[y][x].getHeight());
 						table.setBorderCell(y+1, x+1, Constants.WDLINESTYLEDASHDOT, Constants.WDLINEWIDTH025PT, border);
+						if (pageLabel.getCellDimensions()[y][x].isLabel()){
+							table.setTextInCell(y+1, x+1, schoolVO.getFirstName());
+						}
 					}
 				}
 			}

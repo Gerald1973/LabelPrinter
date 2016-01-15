@@ -1,7 +1,5 @@
 package com.smilesmile1973.label;
 
-import java.awt.Rectangle;
-
 /**
  * This class represent a page label. This is a sheet wit every labels.
  * 
@@ -22,7 +20,7 @@ public class PageLabel {
 	private int numberOfLabelHeight;
 	private int numberOfColumns;
 	private int numberOfRows;
-	private CellDimension[][] cellDimensions;
+	private CellPageLabel[][] cellDimensions;
 
 	/**
 	 * This constructor initialise a page of labels with the given data.
@@ -62,9 +60,10 @@ public class PageLabel {
 	}
 
 	private void buildCellDimensions(int numberOfRows, int numberOfColumns) {
-		cellDimensions = new CellDimension[numberOfRows][numberOfColumns];
+		cellDimensions = new CellPageLabel[numberOfRows][numberOfColumns];
 		float tmpHeight = 0;
 		float tmpWidth = 0;
+		boolean tmpIsLabel = false;
 		for (int i = 0; i < numberOfRows; i++) {
 			if (getInterLabelHeight() > 0) {
 				if (i % 2 == 1) {
@@ -81,11 +80,13 @@ public class PageLabel {
 						tmpWidth = getInterLabelWidth();
 					} else {
 						tmpWidth = getStickLabel().getWidth();
+						tmpIsLabel = (i%2 == 0) && (j%2 == 0);
 					}
 				} else {
 					tmpWidth = getStickLabel().getWidth();
 				}
-				cellDimensions[i][j] = new CellDimension(tmpWidth, tmpHeight);
+				
+				cellDimensions[i][j] = new CellPageLabel(tmpWidth, tmpHeight,tmpIsLabel);
 			}
 		}
 	}
@@ -238,11 +239,11 @@ public class PageLabel {
 		this.height = height;
 	}
 
-	public CellDimension[][] getCellDimensions() {
+	public CellPageLabel[][] getCellDimensions() {
 		return cellDimensions;
 	}
 
-	public void setCellDimensions(CellDimension[][] cellDimensions) {
+	public void setCellDimensions(CellPageLabel[][] cellDimensions) {
 		this.cellDimensions = cellDimensions;
 	}
 

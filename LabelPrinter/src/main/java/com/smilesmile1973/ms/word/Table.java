@@ -88,4 +88,11 @@ public class Table extends AbstractOleWordObject<Document> {
 		}
 	}
 
+	public void setTextInCell(int row, int column, String text) {
+		Variant[] tmps = OleUtils.INSTANCE.buildArrayOfVariant(row, column);
+		Variant cell = OleUtils.INSTANCE.executeMethod(getMyVariant().getAutomation(), "Cell", tmps);
+		Variant range = OleUtils.INSTANCE.getProperty(cell.getAutomation(), "Range");
+		OleUtils.INSTANCE.setProperty(range.getAutomation(), "Text", new Variant(text));
+	}
+
 }
