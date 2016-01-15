@@ -78,6 +78,7 @@ public class PageLabel {
 				if (getInterLabelWidth() > 0) {
 					if (j % 2 == 1) {
 						tmpWidth = getInterLabelWidth();
+						tmpIsLabel = false;
 					} else {
 						tmpWidth = getStickLabel().getWidth();
 						tmpIsLabel = (i%2 == 0) && (j%2 == 0);
