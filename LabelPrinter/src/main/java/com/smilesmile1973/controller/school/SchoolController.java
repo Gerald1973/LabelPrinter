@@ -47,6 +47,7 @@ public class SchoolController {
 					for (int x = 0; x < pageLabel.getNumberOfColumns(); x++) {
 						table.setSizeOfCell(y+1, x+1, pageLabel.getCellDimensions()[y][x].getWidth(),
 								pageLabel.getCellDimensions()[y][x].getHeight());
+						table.setBorderCell(y+1, x+1, Constants.WDLINESTYLEDASHDOT, Constants.WDLINEWIDTH025PT, border);
 					}
 				}
 			}
