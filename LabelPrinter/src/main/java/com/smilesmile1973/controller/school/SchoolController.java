@@ -9,11 +9,11 @@ import com.smilesmile1973.controller.MainController;
 import com.smilesmile1973.label.PageLabel;
 import com.smilesmile1973.label.StickLabel;
 import com.smilesmile1973.model.school.SchoolModel;
-import com.smilesmile1973.model.school.SchoolVO;
 import com.smilesmile1973.ms.word.Document;
 import com.smilesmile1973.ms.word.PageSetup;
 import com.smilesmile1973.ms.word.Table;
 import com.smilesmile1973.view.school.SchoolFrame;
+import com.smilesmile1973.vo.SchoolVO;
 
 public class SchoolController {
 	private SchoolFrame schoolFrame;
@@ -55,7 +55,7 @@ public class SchoolController {
 								pageLabel.getCellDimensions()[y][x].getHeight());
 						table.setBorderCell(y+1, x+1, Constants.WDLINESTYLEDASHDOT, Constants.WDLINEWIDTH025PT, border);
 						if (pageLabel.getCellDimensions()[y][x].isLabel()){
-							table.setTextInCell(y+1, x+1, schoolVO.getFirstName());
+							table.setTextInCell(y+1, x+1, schoolVO.getString());
 						}
 					}
 				}
