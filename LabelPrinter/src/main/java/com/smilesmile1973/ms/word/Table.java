@@ -88,6 +88,16 @@ public class Table extends AbstractOleWordObject<Document> {
 		}
 	}
 
+	/**
+	 * This mthod add some texts in one cell.
+	 * 
+	 * @param row
+	 *            the row 1 based.
+	 * @param column
+	 *            the column 1 based
+	 * @param text
+	 *            the text to display
+	 */
 	public void setTextInCell(int row, int column, String text) {
 		Variant[] tmps = OleUtils.INSTANCE.buildArrayOfVariant(row, column);
 		Variant cell = OleUtils.INSTANCE.executeMethod(getMyVariant().getAutomation(), "Cell", tmps);
@@ -95,4 +105,57 @@ public class Table extends AbstractOleWordObject<Document> {
 		OleUtils.INSTANCE.setProperty(range.getAutomation(), "Text", new Variant(text));
 	}
 
+	public void addPictureInCell(int row, int column, String picturePath) {
+		picturePath = "C:\\Users\\marechal\\Downloads\\mustang.jpg";
+
+		Variant[] tmps = OleUtils.INSTANCE.buildArrayOfVariant(row, column);
+		Variant cell = OleUtils.INSTANCE.executeMethod(getMyVariant().getAutomation(), "Cell", tmps);
+		Variant cellRange = OleUtils.INSTANCE.getProperty(cell.getAutomation(), "Range");
+		Variant inlineShapes = OleUtils.INSTANCE.getProperty(cellRange.getAutomation(), "InlineShapes");
+		OleUtils.INSTANCE.executeMethod(inlineShapes.getAutomation(), "AddPicture",
+				new Variant[] { new Variant(picturePath) });
+		Variant variantInlineShape = OleUtils.INSTANCE.getElementInCollection(inlineShapes.getAutomation(), 1);
+		Variant variantShape = OleUtils.INSTANCE.executeMethod(variantInlineShape.getAutomation(), "ConvertToShape",
+				null);
+		OleUtils.INSTANCE.setProperty(variantShape.getAutomation(), "Width",
+				new Variant(ConversionUtils.INSTANCE.cmToPoint(Constants.ICON_WITH_FOR_LABEL)));
+		OleUtils.INSTANCE.setProperty(variantShape.getAutomation(), "Height",
+				new Variant(ConversionUtils.INSTANCE.cmToPoint(Constants.ICON_HEIGHT_FOR_LABEL)));
+		Variant wrapFormat = OleUtils.INSTANCE.getProperty(variantShape.getAutomation(), "WrapFormat");
+		Variant distance = new Variant(ConversionUtils.INSTANCE.cmToPoint(Constants.DISTANCE_PICTURE));
+		OleUtils.INSTANCE.setProperty(wrapFormat.getAutomation(), "Type", new Variant(Constants.WDWRAPSQUARE));
+		OleUtils.INSTANCE.setProperty(wrapFormat.getAutomation(), "DistanceTop", distance);
+		OleUtils.INSTANCE.setProperty(wrapFormat.getAutomation(), "DistanceBottom", distance);
+		OleUtils.INSTANCE.setProperty(wrapFormat.getAutomation(), "DistanceLeft", distance);
+		OleUtils.INSTANCE.setProperty(wrapFormat.getAutomation(), "DistanceRight", distance);
+	}
+
+	/**
+	 * This method set the paddings inside the cell (margin inside cell).
+	 * 
+	 * @param row
+	 *            the row, 1 based.
+	 * @param column
+	 *            the column, 1 based.
+	 * @param top
+	 *            the padding in cm.
+	 * @param right
+	 *            the padding in cm.
+	 * @param bottom
+	 *            the padding in cm.
+	 * @param left
+	 *            the padding in cm.
+	 */
+	public void setCellPadding(int row, int column, float top, float right, float bottom, float left) {
+		Variant[] tmps = OleUtils.INSTANCE.buildArrayOfVariant(row, column);
+		Variant cell = OleUtils.INSTANCE.executeMethod(getMyVariant().getAutomation(), "Cell", tmps);
+		int topPadding = ConversionUtils.INSTANCE.cmToPoint(top);
+		int rightPadding = ConversionUtils.INSTANCE.cmToPoint(right);
+		int bottomPadding = ConversionUtils.INSTANCE.cmToPoint(bottom);
+		int leftPadding = ConversionUtils.INSTANCE.cmToPoint(left);
+		OleUtils.INSTANCE.setProperty(cell.getAutomation(), "TopPadding", new Variant(topPadding));
+		OleUtils.INSTANCE.setProperty(cell.getAutomation(), "RightPadding", new Variant(rightPadding));
+		OleUtils.INSTANCE.setProperty(cell.getAutomation(), "BottomPadding", new Variant(bottomPadding));
+		OleUtils.INSTANCE.setProperty(cell.getAutomation(), "LeftPadding", new Variant(leftPadding));
+	}
 }

@@ -37,13 +37,14 @@ public class SchoolController {
 				schoolVO.setName(schoolFrame.getFamilyNameValue());
 				schoolVO.setRoom(schoolFrame.getRoomValue());
 				Document document = mainController.getWord().getActiveDocument();
+				document.setParagraphSpacingBeforeAfter(0, 0);
 				PageSetup pageSetup = document.getPageSetup();
 				pageSetup.setTopMargin(0);
 				pageSetup.setRightMargin(0);
 				pageSetup.setBottomMargin(0);
 				pageSetup.setLeftMargin(0);
 				StickLabel stickLabel = new StickLabel(6.35f, 3.81f);
-				PageLabel pageLabel = new PageLabel(pageSetup.getPageWidth(), pageSetup.getHeight(), 0, 0, 0, 0,
+				PageLabel pageLabel = new PageLabel(pageSetup.getPageWidth(), pageSetup.getHeight(), 0.5f, 0.5f, 0.5f, 0.5f,
 						stickLabel);
 				document.addTable(pageLabel.getNumberOfRows(), pageLabel.getNumberOfColumns());
 				Table table = document.getTable(1);
@@ -51,11 +52,15 @@ public class SchoolController {
 						| Constants.BORDERLEFT;
 				for (int y = 0; y < pageLabel.getNumberOfRows(); y++) {
 					for (int x = 0; x < pageLabel.getNumberOfColumns(); x++) {
-						table.setSizeOfCell(y+1, x+1, pageLabel.getCellDimensions()[y][x].getWidth(),
+						table.setSizeOfCell(y + 1, x + 1, pageLabel.getCellDimensions()[y][x].getWidth(),
 								pageLabel.getCellDimensions()[y][x].getHeight());
-						table.setBorderCell(y+1, x+1, Constants.WDLINESTYLEDASHDOT, Constants.WDLINEWIDTH025PT, border);
-						if (pageLabel.getCellDimensions()[y][x].isLabel()){
-							table.setTextInCell(y+1, x+1, schoolVO.getString());
+						table.setBorderCell(y + 1, x + 1, Constants.WDLINESTYLEDASHDOT, Constants.WDLINEWIDTH025PT,
+								border);
+						if (pageLabel.getCellDimensions()[y][x].isLabel()) {
+							table.setCellPadding(y + 1, x + 1, Constants.DEFAULT_PADDING, Constants.DEFAULT_PADDING,
+									Constants.DEFAULT_PADDING, Constants.DEFAULT_PADDING);
+							table.setTextInCell(y + 1, x + 1, schoolVO.getString());
+							table.addPictureInCell(y + 1, x + 1, "To reimplement");
 						}
 					}
 				}
@@ -63,7 +68,6 @@ public class SchoolController {
 		});
 
 		schoolFrame.getMainPanel().addCancelButtonListener(new Listener() {
-
 			public void handleEvent(Event event) {
 				schoolFrame.dispose();
 			}

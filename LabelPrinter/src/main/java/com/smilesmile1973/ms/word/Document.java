@@ -63,4 +63,19 @@ public class Document extends AbstractOleWordObject<Word> {
 		result = new PageSetup(this, tmp);
 		return result;
 	}
+
+	/**
+	 * This method set the spacing after and before all paragraphs
+	 * 
+	 * @param spaceBefore
+	 *            the number of points before
+	 * @param spaceAfter
+	 *            the number of points after.
+	 */
+	public void setParagraphSpacingBeforeAfter(int spaceBefore, int spaceAfter) {
+		Variant range = OleUtils.INSTANCE.executeMethod(getMyVariant().getAutomation(), "Range",null);
+		Variant paragraphFormat = OleUtils.INSTANCE.getProperty(range.getAutomation(), "ParagraphFormat");
+		OleUtils.INSTANCE.setProperty(paragraphFormat.getAutomation(), "SpaceBefore", new Variant(spaceBefore));
+		OleUtils.INSTANCE.setProperty(paragraphFormat.getAutomation(), "SpaceAfter", new Variant(spaceAfter));
+	}
 }
