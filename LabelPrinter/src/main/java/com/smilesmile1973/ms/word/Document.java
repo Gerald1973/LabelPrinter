@@ -32,7 +32,7 @@ public class Document extends AbstractOleWordObject<Word> {
 		tableVariants[0] = range;
 		tableVariants[1] = new Variant(numberOfRow);
 		tableVariants[2] = new Variant(numberOfColumn);
-		OleUtils.INSTANCE.executeMethod(tables.getAutomation(), "Add", tableVariants);
+		OleUtils.INSTANCE.executeMethod(tables.getAutomation(), "Add", tableVariants); 
 	}
 
 	/**

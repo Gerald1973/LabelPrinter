@@ -102,7 +102,7 @@ public class Table extends AbstractOleWordObject<Document> {
 		Variant[] tmps = OleUtils.INSTANCE.buildArrayOfVariant(row, column);
 		Variant cell = OleUtils.INSTANCE.executeMethod(getMyVariant().getAutomation(), "Cell", tmps);
 		Variant range = OleUtils.INSTANCE.getProperty(cell.getAutomation(), "Range");
-		OleUtils.INSTANCE.setProperty(range.getAutomation(), "Text", new Variant(text));
+		OleUtils.INSTANCE.executeMethod(range.getAutomation(), "InsertAfter", new Variant[] { new Variant(text) });
 	}
 
 	public void addPictureInCell(int row, int column, String picturePath) {

@@ -44,8 +44,8 @@ public class SchoolController {
 				pageSetup.setBottomMargin(0);
 				pageSetup.setLeftMargin(0);
 				StickLabel stickLabel = new StickLabel(6.35f, 3.81f);
-				PageLabel pageLabel = new PageLabel(pageSetup.getPageWidth(), pageSetup.getHeight(), 0.5f, 0.5f, 0.5f, 0.5f,
-						stickLabel);
+				PageLabel pageLabel = new PageLabel(pageSetup.getPageWidth(), pageSetup.getHeight(), 0.5f, 0.5f, 0.5f,
+						0.5f, stickLabel);
 				document.addTable(pageLabel.getNumberOfRows(), pageLabel.getNumberOfColumns());
 				Table table = document.getTable(1);
 				int border = Constants.BORDERBOTTOM | Constants.BORDERRIGHT | Constants.BORDERBOTTOM
@@ -59,8 +59,8 @@ public class SchoolController {
 						if (pageLabel.getCellDimensions()[y][x].isLabel()) {
 							table.setCellPadding(y + 1, x + 1, Constants.DEFAULT_PADDING, Constants.DEFAULT_PADDING,
 									Constants.DEFAULT_PADDING, Constants.DEFAULT_PADDING);
-							table.setTextInCell(y + 1, x + 1, schoolVO.getString());
 							table.addPictureInCell(y + 1, x + 1, "To reimplement");
+							table.setTextInCell(y + 1, x + 1, schoolVO.getString());
 						}
 					}
 				}
