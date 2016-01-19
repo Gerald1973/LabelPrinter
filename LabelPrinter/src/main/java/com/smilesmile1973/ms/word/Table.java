@@ -117,16 +117,18 @@ public class Table extends AbstractOleWordObject<Document> {
 		Variant variantInlineShape = OleUtils.INSTANCE.getElementInCollection(inlineShapes.getAutomation(), 1);
 		Variant variantShape = OleUtils.INSTANCE.executeMethod(variantInlineShape.getAutomation(), "ConvertToShape",
 				null);
+		OleUtils.INSTANCE.setProperty(variantShape.getAutomation(), "LockAnchor", new Variant(true));
 		OleUtils.INSTANCE.setProperty(variantShape.getAutomation(), "Width",
 				new Variant(ConversionUtils.INSTANCE.cmToPoint(Constants.ICON_WITH_FOR_LABEL)));
 		OleUtils.INSTANCE.setProperty(variantShape.getAutomation(), "Height",
 				new Variant(ConversionUtils.INSTANCE.cmToPoint(Constants.ICON_HEIGHT_FOR_LABEL)));
 		Variant wrapFormat = OleUtils.INSTANCE.getProperty(variantShape.getAutomation(), "WrapFormat");
 		Variant distance = new Variant(ConversionUtils.INSTANCE.cmToPoint(Constants.DISTANCE_PICTURE));
+		OleUtils.INSTANCE.setProperty(wrapFormat.getAutomation(), "RelativeVerticalPosition", new Variant(Constants.WDWRAPSQUARE));
 		OleUtils.INSTANCE.setProperty(wrapFormat.getAutomation(), "Type", new Variant(Constants.WDWRAPSQUARE));
-		OleUtils.INSTANCE.setProperty(wrapFormat.getAutomation(), "DistanceTop", distance);
+		OleUtils.INSTANCE.setProperty(wrapFormat.getAutomation(), "Top", distance);
 		OleUtils.INSTANCE.setProperty(wrapFormat.getAutomation(), "DistanceBottom", distance);
-		OleUtils.INSTANCE.setProperty(wrapFormat.getAutomation(), "DistanceLeft", distance);
+		OleUtils.INSTANCE.setProperty(wrapFormat.getAutomation(), "Left", distance);
 		OleUtils.INSTANCE.setProperty(wrapFormat.getAutomation(), "DistanceRight", distance);
 	}
 

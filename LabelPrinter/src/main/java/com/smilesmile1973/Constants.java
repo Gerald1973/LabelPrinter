@@ -1,11 +1,12 @@
 package com.smilesmile1973;
 
 public class Constants {
-	public static final float NUMBER_OF_POINTS_BY_CM = 28.3464f;
+	public static final float NUMBER_OF_POINTS_BY_CM = 28.3464567f;
 	public static final float ICON_WITH_FOR_LABEL = 2;
 	public static final float ICON_HEIGHT_FOR_LABEL = 2;
 	public static final float DISTANCE_PICTURE = 0.2f;
 	public static final float DEFAULT_PADDING = 0.2f;
+	public static final int SCALE = 4;
 	// WdRowHeightRule (Word)
 	public static final int WDROWHEIGHTAUTO = 0;
 	public static final int WDROWHEIGHTATLEAST = 1;
@@ -109,5 +110,15 @@ public class Constants {
 	public static final int WDWRAPTOPBOTTOM = 4;
 	public static final int WDWRAPBEHIND = 5;
 	public static final int WDWRAPFRONT = 6;
+	//wdRelativeVerticalPositionLine
+	public static final int WDRELATIVEVERTICALPOSITIONLINE=3;
+	public static final int WDRELATIVEVERTICALPOSITIONMARGIN=0;
+	public static final int WDRELATIVEVERTICALPOSITIONPAGE=1;
+	public static final int WDRELATIVEVERTICALPOSITIONPARAGRAPH=2;
+	public static final int WDRELATIVEVERTICALPOSITIONBOTTOMMARGINAREA=5;
+	public static final int WDRELATIVEVERTICALPOSITIONINNERMARGINAREA=6;
+	public static final int WDRELATIVEVERTICALPOSITIONOUTERMARGINAREA=7;
+	public static final int WDRELATIVEVERTICALPOSITIONTOPMARGINAREA=4;
+	
 
 }

@@ -1,5 +1,8 @@
 package com.smilesmile1973.label;
 
+import com.smilesmile1973.Constants;
+import com.smilesmile1973.ConversionUtils;
+
 /**
  * This class represent a page label. This is a sheet wit every labels.
  * 
@@ -43,17 +46,24 @@ public class PageLabel {
 	 */
 	public PageLabel(float width, float height, float marginTop, float marginRight, float marginBottom,
 			float marginLeft, StickLabel stickLabel) {
-		this.width = width;
-		this.height = height;
+		this.width = ConversionUtils.INSTANCE.roundToNDecimals(width, Constants.SCALE);
+		this.height = ConversionUtils.INSTANCE.roundToNDecimals(height, Constants.SCALE);
 		this.stickLabel = stickLabel;
-		this.marginTop = marginTop;
-		this.marginRight = marginRight;
-		this.marginBottom = marginBottom;
-		this.marginLeft = marginLeft;
+		this.marginTop = ConversionUtils.INSTANCE.roundToNDecimals(marginTop, Constants.SCALE);
+		this.marginRight = ConversionUtils.INSTANCE.roundToNDecimals(marginRight, Constants.SCALE);
+		this.marginBottom = ConversionUtils.INSTANCE.roundToNDecimals(marginBottom, Constants.SCALE);
+		this.marginLeft = ConversionUtils.INSTANCE.roundToNDecimals(marginLeft, Constants.SCALE);
 		this.numberOfLabelHeight = calculateNumberOfLabelHeight(stickLabel);
+
 		this.numberOfLabelWidth = calculateNumberOfLabelWidth(stickLabel);
 		this.interLabelWidth = calculateInterLabelWidth(stickLabel, this.numberOfLabelWidth);
+		if (interLabelWidth > 0 && ConversionUtils.INSTANCE.cmToPoint((float) interLabelWidth) < 1) {
+			interLabelWidth = 0;
+		}
 		this.interLabelHeight = calculateInterLabelHeight(stickLabel, this.numberOfLabelHeight);
+		if (interLabelHeight > 0 && ConversionUtils.INSTANCE.cmToPoint((float) interLabelHeight) < 1) {
+			interLabelHeight = 0;
+		}
 		this.numberOfColumns = calculateNumberOfColumns(stickLabel, numberOfLabelWidth, interLabelWidth);
 		this.numberOfRows = calculateNumberOfRows(stickLabel, numberOfLabelHeight, interLabelHeight);
 		buildCellDimensions(numberOfRows, numberOfColumns);
@@ -81,26 +91,30 @@ public class PageLabel {
 						tmpIsLabel = false;
 					} else {
 						tmpWidth = getStickLabel().getWidth();
-						tmpIsLabel = (i%2 == 0) && (j%2 == 0);
+						tmpIsLabel = (i % 2 == 0) && (j % 2 == 0);
 					}
 				} else {
 					tmpWidth = getStickLabel().getWidth();
+					if (getInterLabelHeight() > 0) {
+						tmpIsLabel = (i % 2 == 0);
+					} else {
+						tmpIsLabel = true;
+					}
 				}
-				
-				cellDimensions[i][j] = new CellPageLabel(tmpWidth, tmpHeight,tmpIsLabel);
+				cellDimensions[i][j] = new CellPageLabel(tmpWidth, tmpHeight, tmpIsLabel);
 			}
 		}
 	}
 
 	private int calculateNumberOfLabelWidth(StickLabel stickLabel) {
 		int result = 0;
-		result = (int) Math.floor((width - (this.marginLeft + this.marginRight)) / stickLabel.getWidth());
+		result = (int) Math.round((width - (this.marginLeft + this.marginRight)) / stickLabel.getWidth());
 		return result;
 	}
 
 	private int calculateNumberOfLabelHeight(StickLabel stickLabel) {
 		int result = 0;
-		result = (int) Math.floor((height - (this.marginTop + this.marginBottom)) / stickLabel.getHeight());
+		result = (int) Math.round((height - (this.marginTop + this.marginBottom)) / stickLabel.getHeight());
 		return result;
 	}
 
@@ -109,6 +123,11 @@ public class PageLabel {
 		float usedSpace = numberOfLabelWidth * stickLabel.getWidth();
 		float freeSpace = this.width - (this.marginRight + this.marginLeft) - usedSpace;
 		result = freeSpace / (numberOfLabelWidth - 1);
+		if (result < 0) {
+			result = 0;
+		} else {
+			result = ConversionUtils.INSTANCE.roundToNDecimals(result, Constants.SCALE);
+		}
 		return result;
 	}
 
@@ -117,6 +136,11 @@ public class PageLabel {
 		float usedSpace = numberOfLabelHeight * stickLabel.getHeight();
 		float freeSpace = this.height - (this.marginTop + this.marginBottom) - usedSpace;
 		result = freeSpace / (numberOfLabelHeight - 1);
+		if (result < 0) {
+			result = 0;
+		} else {
+			result = ConversionUtils.INSTANCE.roundToNDecimals(result, Constants.SCALE);
+		}
 		return result;
 	}
 

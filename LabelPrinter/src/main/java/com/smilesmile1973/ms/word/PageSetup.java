@@ -2,6 +2,7 @@ package com.smilesmile1973.ms.word;
 
 import org.eclipse.swt.ole.win32.Variant;
 
+import com.smilesmile1973.Constants;
 import com.smilesmile1973.ConversionUtils;
 import com.smilesmile1973.OleUtils;
 
@@ -68,6 +69,46 @@ public class PageSetup extends AbstractOleWordObject<Document> {
 		float result = 0;
 		Variant tmp = OleUtils.INSTANCE.getProperty(getMyVariant().getAutomation(), "PageHeight");
 		result = ConversionUtils.INSTANCE.pointToCm(tmp.getInt());
+		return result;
+	}
+
+	/**
+	 * @return the top margin of the page in cm.
+	 */
+	public float getTopMargin() {
+		float result = 0;
+		int tmp = OleUtils.INSTANCE.getProperty(getMyVariant().getAutomation(), "TopMargin").getInt();
+		result = ConversionUtils.INSTANCE.roundToNDecimals(ConversionUtils.INSTANCE.pointToCm(tmp), Constants.SCALE);
+		return result;
+	}
+
+	/**
+	 * @return the right margin of the page in cm.
+	 */
+	public float getRightMargin() {
+		float result = 0;
+		int tmp = OleUtils.INSTANCE.getProperty(getMyVariant().getAutomation(), "RightMargin").getInt();
+		result = ConversionUtils.INSTANCE.roundToNDecimals(ConversionUtils.INSTANCE.pointToCm(tmp), Constants.SCALE);
+		return result;
+	}
+
+	/**
+	 * @return the bottom margin of the page in cm.
+	 */
+	public float getBottomMargin() {
+		float result = 0;
+		int tmp = OleUtils.INSTANCE.getProperty(getMyVariant().getAutomation(), "BottomMargin").getInt();
+		result = ConversionUtils.INSTANCE.roundToNDecimals(ConversionUtils.INSTANCE.pointToCm(tmp), Constants.SCALE);
+		return result;
+	}
+
+	/**
+	 * @return the left margin of the page in cm.
+	 */
+	public float getLeftMargin() {
+		float result = 0;
+		int tmp = OleUtils.INSTANCE.getProperty(getMyVariant().getAutomation(), "LeftMargin").getInt();
+		result = ConversionUtils.INSTANCE.roundToNDecimals(ConversionUtils.INSTANCE.pointToCm(tmp), Constants.SCALE);
 		return result;
 	}
 }

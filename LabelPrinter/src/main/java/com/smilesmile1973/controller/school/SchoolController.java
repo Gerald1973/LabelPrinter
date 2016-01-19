@@ -6,6 +6,7 @@ import org.eclipse.swt.widgets.Listener;
 import com.smilesmile1973.Constants;
 import com.smilesmile1973.I18NUtils;
 import com.smilesmile1973.controller.MainController;
+import com.smilesmile1973.label.CellPageLabel;
 import com.smilesmile1973.label.PageLabel;
 import com.smilesmile1973.label.StickLabel;
 import com.smilesmile1973.model.school.SchoolModel;
@@ -39,26 +40,27 @@ public class SchoolController {
 				Document document = mainController.getWord().getActiveDocument();
 				document.setParagraphSpacingBeforeAfter(0, 0);
 				PageSetup pageSetup = document.getPageSetup();
-				pageSetup.setTopMargin(0);
-				pageSetup.setRightMargin(0);
-				pageSetup.setBottomMargin(0);
-				pageSetup.setLeftMargin(0);
+				pageSetup.setTopMargin(1.5f);
+				pageSetup.setRightMargin(0.97f);
+				pageSetup.setBottomMargin(1.5f);
+				pageSetup.setLeftMargin(0.97f);
 				StickLabel stickLabel = new StickLabel(6.35f, 3.81f);
-				PageLabel pageLabel = new PageLabel(pageSetup.getPageWidth(), pageSetup.getHeight(), 0.5f, 0.5f, 0.5f,
-						0.5f, stickLabel);
+				PageLabel pageLabel = new PageLabel(pageSetup.getPageWidth(), pageSetup.getHeight(),
+						pageSetup.getTopMargin(), pageSetup.getRightMargin(), pageSetup.getBottomMargin(),
+						pageSetup.getBottomMargin(), stickLabel);
 				document.addTable(pageLabel.getNumberOfRows(), pageLabel.getNumberOfColumns());
 				Table table = document.getTable(1);
 				int border = Constants.BORDERBOTTOM | Constants.BORDERRIGHT | Constants.BORDERBOTTOM
 						| Constants.BORDERLEFT;
+				CellPageLabel cells[][] = pageLabel.getCellDimensions();
 				for (int y = 0; y < pageLabel.getNumberOfRows(); y++) {
 					for (int x = 0; x < pageLabel.getNumberOfColumns(); x++) {
-						table.setSizeOfCell(y + 1, x + 1, pageLabel.getCellDimensions()[y][x].getWidth(),
-								pageLabel.getCellDimensions()[y][x].getHeight());
+						table.setSizeOfCell(y + 1, x + 1, cells[y][x].getWidth(), cells[y][x].getHeight());
 						table.setBorderCell(y + 1, x + 1, Constants.WDLINESTYLEDASHDOT, Constants.WDLINEWIDTH025PT,
 								border);
-						if (pageLabel.getCellDimensions()[y][x].isLabel()) {
-							table.setCellPadding(y + 1, x + 1, Constants.DEFAULT_PADDING, Constants.DEFAULT_PADDING,
-									Constants.DEFAULT_PADDING, Constants.DEFAULT_PADDING);
+						if (cells[y][x].isLabel()) {
+							//table.setCellPadding(y + 1, x + 1, Constants.DEFAULT_PADDING, Constants.DEFAULT_PADDING,
+							//	Constants.DEFAULT_PADDING, Constants.DEFAULT_PADDING);
 							table.addPictureInCell(y + 1, x + 1, "To reimplement");
 							table.setTextInCell(y + 1, x + 1, schoolVO.getString());
 						}
