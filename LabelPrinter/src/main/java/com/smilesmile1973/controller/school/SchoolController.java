@@ -59,8 +59,6 @@ public class SchoolController {
 						table.setBorderCell(y + 1, x + 1, Constants.WDLINESTYLEDASHDOT, Constants.WDLINEWIDTH025PT,
 								border);
 						if (cells[y][x].isLabel()) {
-							//table.setCellPadding(y + 1, x + 1, Constants.DEFAULT_PADDING, Constants.DEFAULT_PADDING,
-							//	Constants.DEFAULT_PADDING, Constants.DEFAULT_PADDING);
 							table.addPictureInCell(y + 1, x + 1, "To reimplement");
 							table.setTextInCell(y + 1, x + 1, schoolVO.getString());
 						}
