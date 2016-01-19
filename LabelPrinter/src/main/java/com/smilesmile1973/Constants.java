@@ -110,15 +110,13 @@ public class Constants {
 	public static final int WDWRAPTOPBOTTOM = 4;
 	public static final int WDWRAPBEHIND = 5;
 	public static final int WDWRAPFRONT = 6;
-	//wdRelativeVerticalPositionLine
-	public static final int WDRELATIVEVERTICALPOSITIONLINE=3;
-	public static final int WDRELATIVEVERTICALPOSITIONMARGIN=0;
-	public static final int WDRELATIVEVERTICALPOSITIONPAGE=1;
-	public static final int WDRELATIVEVERTICALPOSITIONPARAGRAPH=2;
-	public static final int WDRELATIVEVERTICALPOSITIONBOTTOMMARGINAREA=5;
-	public static final int WDRELATIVEVERTICALPOSITIONINNERMARGINAREA=6;
-	public static final int WDRELATIVEVERTICALPOSITIONOUTERMARGINAREA=7;
-	public static final int WDRELATIVEVERTICALPOSITIONTOPMARGINAREA=4;
-	
-
+	// wdRelativeVerticalPositionLine
+	public static final int WDRELATIVEVERTICALPOSITIONLINE = 3;
+	public static final int WDRELATIVEVERTICALPOSITIONMARGIN = 0;
+	public static final int WDRELATIVEVERTICALPOSITIONPAGE = 1;
+	public static final int WDRELATIVEVERTICALPOSITIONPARAGRAPH = 2;
+	public static final int WDRELATIVEVERTICALPOSITIONBOTTOMMARGINAREA = 5;
+	public static final int WDRELATIVEVERTICALPOSITIONINNERMARGINAREA = 6;
+	public static final int WDRELATIVEVERTICALPOSITIONOUTERMARGINAREA = 7;
+	public static final int WDRELATIVEVERTICALPOSITIONTOPMARGINAREA = 4;
 }

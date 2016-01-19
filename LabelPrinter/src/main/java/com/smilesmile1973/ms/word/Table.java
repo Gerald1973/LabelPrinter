@@ -124,12 +124,9 @@ public class Table extends AbstractOleWordObject<Document> {
 				new Variant(ConversionUtils.INSTANCE.cmToPoint(Constants.ICON_HEIGHT_FOR_LABEL)));
 		Variant wrapFormat = OleUtils.INSTANCE.getProperty(variantShape.getAutomation(), "WrapFormat");
 		Variant distance = new Variant(ConversionUtils.INSTANCE.cmToPoint(Constants.DISTANCE_PICTURE));
-		OleUtils.INSTANCE.setProperty(wrapFormat.getAutomation(), "RelativeVerticalPosition", new Variant(Constants.WDWRAPSQUARE));
 		OleUtils.INSTANCE.setProperty(wrapFormat.getAutomation(), "Type", new Variant(Constants.WDWRAPSQUARE));
-		OleUtils.INSTANCE.setProperty(wrapFormat.getAutomation(), "Top", distance);
-		OleUtils.INSTANCE.setProperty(wrapFormat.getAutomation(), "DistanceBottom", distance);
-		OleUtils.INSTANCE.setProperty(wrapFormat.getAutomation(), "Left", distance);
-		OleUtils.INSTANCE.setProperty(wrapFormat.getAutomation(), "DistanceRight", distance);
+		OleUtils.INSTANCE.setProperty(variantShape.getAutomation(), "Top", distance);
+		OleUtils.INSTANCE.setProperty(variantShape.getAutomation(), "Left", distance);
 	}
 
 	/**
