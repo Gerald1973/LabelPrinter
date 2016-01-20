@@ -3,6 +3,7 @@ package com.smilesmile1973.controller.school;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Listener;
@@ -91,7 +92,7 @@ public class SchoolController {
 				String selected = fileDialog.open();
 				schoolVO.setPathAndFileName(selected);
 				if (StringUtils.isNotEmpty(selected)) {
-					Image image = new Image(mainController.getMainShell().getDisplay(), schoolVO.getPathAndFileName());
+					Image image = new Image(Display.getDefault(), schoolVO.getPathAndFileName());
 					schoolFrame.getMainPanel().setImage(image);
 				} else {
 					schoolFrame.getMainPanel().setImage(null);
