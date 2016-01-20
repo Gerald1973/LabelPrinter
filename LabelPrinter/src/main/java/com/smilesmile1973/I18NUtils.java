@@ -12,7 +12,7 @@ public enum I18NUtils {
 	}
 
 	private I18NUtils(String resourceBundleFile) {
-		System.out.println(this.getClass().getClassLoader().getResourceAsStream(".").toString());
+		//System.out.println(this.getClass().getClassLoader().getResourceAsStream(".").toString());
 		resourceBundle = ResourceBundle.getBundle(resourceBundleFile);
 	}
 }

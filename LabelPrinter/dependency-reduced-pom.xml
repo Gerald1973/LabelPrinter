@@ -68,6 +68,14 @@
       <url>http://maven-eclipse.github.io/maven</url>
     </repository>
   </repositories>
+  <reporting>
+    <plugins>
+      <plugin>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>3.6</version>
+      </plugin>
+    </plugins>
+  </reporting>
   <dependencyManagement>
     <dependencies>
       <dependency>
