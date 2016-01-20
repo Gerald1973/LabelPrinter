@@ -106,8 +106,6 @@ public class Table extends AbstractOleWordObject<Document> {
 	}
 
 	public void addPictureInCell(int row, int column, String picturePath) {
-		picturePath = "C:\\Users\\marechal\\Downloads\\mustang.jpg";
-
 		Variant[] tmps = OleUtils.INSTANCE.buildArrayOfVariant(row, column);
 		Variant cell = OleUtils.INSTANCE.executeMethod(getMyVariant().getAutomation(), "Cell", tmps);
 		Variant cellRange = OleUtils.INSTANCE.getProperty(cell.getAutomation(), "Range");

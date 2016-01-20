@@ -1,6 +1,9 @@
 package com.smilesmile1973.controller.school;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Listener;
 
 import com.smilesmile1973.Constants;
@@ -20,6 +23,7 @@ public class SchoolController {
 	private SchoolFrame schoolFrame;
 	private SchoolModel schoolModel;
 	private MainController mainController;
+	private SchoolVO schoolVO = new SchoolVO();
 
 	public SchoolController(MainController mainController) {
 		initModel();
@@ -29,47 +33,60 @@ public class SchoolController {
 		initListeners();
 	}
 
+	private void generateTable() {
+		Document document = mainController.getWord().getActiveDocument();
+		document.setParagraphSpacingBeforeAfter(0, 0);
+		PageSetup pageSetup = document.getPageSetup();
+		pageSetup.setTopMargin(1.5f);
+		pageSetup.setRightMargin(0.97f);
+		pageSetup.setBottomMargin(1.5f);
+		pageSetup.setLeftMargin(0.97f);
+		StickLabel stickLabel = new StickLabel(6.35f, 3.81f);
+		PageLabel pageLabel = new PageLabel(pageSetup.getPageWidth(), pageSetup.getHeight(), pageSetup.getTopMargin(),
+				pageSetup.getRightMargin(), pageSetup.getBottomMargin(), pageSetup.getBottomMargin(), stickLabel);
+		document.addTable(pageLabel.getNumberOfRows(), pageLabel.getNumberOfColumns());
+		Table table = document.getTable(1);
+		int border = Constants.BORDERBOTTOM | Constants.BORDERRIGHT | Constants.BORDERBOTTOM | Constants.BORDERLEFT;
+		CellPageLabel cells[][] = pageLabel.getCellDimensions();
+		for (int y = 0; y < pageLabel.getNumberOfRows(); y++) {
+			for (int x = 0; x < pageLabel.getNumberOfColumns(); x++) {
+				table.setSizeOfCell(y + 1, x + 1, cells[y][x].getWidth(), cells[y][x].getHeight());
+				table.setBorderCell(y + 1, x + 1, Constants.WDLINESTYLEDASHDOT, Constants.WDLINEWIDTH025PT, border);
+				if (cells[y][x].isLabel()) {
+					table.addPictureInCell(y + 1, x + 1, schoolVO.getPathAndFileName());
+					table.setTextInCell(y + 1, x + 1, schoolVO.getString());
+				}
+			}
+		}
+	}
+
 	private void initListeners() {
 		schoolFrame.getMainPanel().addInsertButtonListener(new Listener() {
 			public void handleEvent(Event event) {
-				SchoolVO schoolVO = new SchoolVO();
 				schoolVO.setCourse(schoolFrame.getCourseValue());
 				schoolVO.setFirstName(schoolFrame.getFirstNameValue());
 				schoolVO.setName(schoolFrame.getFamilyNameValue());
 				schoolVO.setRoom(schoolFrame.getRoomValue());
-				Document document = mainController.getWord().getActiveDocument();
-				document.setParagraphSpacingBeforeAfter(0, 0);
-				PageSetup pageSetup = document.getPageSetup();
-				pageSetup.setTopMargin(1.5f);
-				pageSetup.setRightMargin(0.97f);
-				pageSetup.setBottomMargin(1.5f);
-				pageSetup.setLeftMargin(0.97f);
-				StickLabel stickLabel = new StickLabel(6.35f, 3.81f);
-				PageLabel pageLabel = new PageLabel(pageSetup.getPageWidth(), pageSetup.getHeight(),
-						pageSetup.getTopMargin(), pageSetup.getRightMargin(), pageSetup.getBottomMargin(),
-						pageSetup.getBottomMargin(), stickLabel);
-				document.addTable(pageLabel.getNumberOfRows(), pageLabel.getNumberOfColumns());
-				Table table = document.getTable(1);
-				int border = Constants.BORDERBOTTOM | Constants.BORDERRIGHT | Constants.BORDERBOTTOM
-						| Constants.BORDERLEFT;
-				CellPageLabel cells[][] = pageLabel.getCellDimensions();
-				for (int y = 0; y < pageLabel.getNumberOfRows(); y++) {
-					for (int x = 0; x < pageLabel.getNumberOfColumns(); x++) {
-						table.setSizeOfCell(y + 1, x + 1, cells[y][x].getWidth(), cells[y][x].getHeight());
-						table.setBorderCell(y + 1, x + 1, Constants.WDLINESTYLEDASHDOT, Constants.WDLINEWIDTH025PT,
-								border);
-						if (cells[y][x].isLabel()) {
-							table.addPictureInCell(y + 1, x + 1, "To reimplement");
-							table.setTextInCell(y + 1, x + 1, schoolVO.getString());
-						}
-					}
-				}
+				generateTable();
 			}
 		});
 
 		schoolFrame.getMainPanel().addCancelButtonListener(new Listener() {
 			public void handleEvent(Event event) {
 				schoolFrame.dispose();
+			}
+		});
+
+		schoolFrame.getMainPanel().addBrowsButtonListener(new Listener() {
+
+			public void handleEvent(Event event) {
+				FileDialog fileDialog = new FileDialog(schoolFrame.getShell(), SWT.OPEN);
+				fileDialog.setText(schoolModel.getSetTitleBrowse());
+				fileDialog.setFilterPath(System.getProperty("user.home"));
+				String selected = fileDialog.open();
+				schoolVO.setPathAndFileName(selected);
+				Image image = new Image(mainController.getMainShell().getDisplay(),schoolVO.getPathAndFileName());
+				schoolFrame.getMainPanel().setImage(image);
 			}
 		});
 
@@ -85,5 +102,6 @@ public class SchoolController {
 		schoolModel.setCancel(I18NUtils.INSTANCE.getString("school.cancel"));
 		schoolModel.setInsert(I18NUtils.INSTANCE.getString("school.insert"));
 		schoolModel.setBrowse(I18NUtils.INSTANCE.getString("school.browse"));
+		schoolModel.setTitleBrowse(I18NUtils.INSTANCE.getString("school.title.browse"));
 	}
 }

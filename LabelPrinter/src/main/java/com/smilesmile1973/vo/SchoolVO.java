@@ -5,6 +5,7 @@ public class SchoolVO {
 	private String firstName;
 	private String course;
 	private String room;
+	private String pathAndFileName;
 
 	public String getName() {
 		return name;
@@ -37,10 +38,20 @@ public class SchoolVO {
 	public void setRoom(String room) {
 		this.room = room;
 	}
+	
+	
 
 	public String getString() {
 		StringBuffer stringBuffer = new StringBuffer();
 		stringBuffer.append(firstName).append("\n").append(name).append("\n").append(course).append("\n").append(room);
 		return stringBuffer.toString();
+	}
+
+	public String getPathAndFileName() {
+		return pathAndFileName;
+	}
+
+	public void setPathAndFileName(String pathAndFileName) {
+		this.pathAndFileName = pathAndFileName;
 	}
 }

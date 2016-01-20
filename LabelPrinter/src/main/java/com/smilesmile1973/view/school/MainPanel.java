@@ -1,14 +1,17 @@
 package com.smilesmile1973.view.school;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 
+import com.smilesmile1973.ImageUtils;
 import com.smilesmile1973.model.school.SchoolModel;
 
 public class MainPanel extends Composite {
@@ -32,10 +35,12 @@ public class MainPanel extends Composite {
 		this.setLayout(gridLayout);
 		// BrowseButton
 		GridData browseButtonGridData = new GridData();
-		browseButtonGridData.verticalAlignment=SWT.TOP;
+		browseButtonGridData.verticalAlignment = SWT.TOP;
 		browseButton = new Button(this, SWT.PUSH);
 		browseButton.setLayoutData(browseButtonGridData);
-		browseButton.setText(model.getBrowse());
+		browseButton.setToolTipText(model.getBrowse());
+		Image imageBrowseButton = ImageUtils.INSTANCE.loadFromInternalResources("folder-2x.png");
+		browseButton.setImage(imageBrowseButton);
 		// Image
 		labelImage = new Label(this, SWT.NONE);
 		GridData labelGridData = new GridData(300, 300);
@@ -77,28 +82,32 @@ public class MainPanel extends Composite {
 		cancelButton = new Button(this, SWT.NONE);
 		cancelButton.setText(model.getCancel());
 		cancelButton.setLayoutData(cancelButtonGridData);
-		//Empty
-		new Label(this,SWT.NONE);
+		// Empty
+		new Label(this, SWT.NONE);
 		// InsertButton
 		GridData insertButtonGridData = new GridData();
-		insertButtonGridData.horizontalAlignment=SWT.RIGHT;
+		insertButtonGridData.horizontalAlignment = SWT.RIGHT;
 		insertButton = new Button(this, SWT.NONE);
 		insertButton.setText(model.getInsert());
 		insertButton.setLayoutData(insertButtonGridData);
 	}
-	
-	public void addInsertButtonListener(Listener listener){
+
+	public void addInsertButtonListener(Listener listener) {
 		insertButton.addListener(SWT.Selection, listener);
 	}
-	
-	public void addCancelButtonListener(Listener listener){
+
+	public void addCancelButtonListener(Listener listener) {
 		cancelButton.addListener(SWT.Selection, listener);
 	}
-	
-	private GridData buildTxtLayoutData(){
+
+	public void addBrowsButtonListener(Listener listener) {
+		browseButton.addListener(SWT.Selection, listener);
+	}
+
+	private GridData buildTxtLayoutData() {
 		GridData result = new GridData();
-		result.widthHint=200;
-		result.horizontalAlignment=SWT.FILL;
+		result.widthHint = 200;
+		result.horizontalAlignment = SWT.FILL;
 		return result;
 	}
 
@@ -116,6 +125,12 @@ public class MainPanel extends Composite {
 
 	public String getRoomValue() {
 		return inputClass.getText();
+	}
+
+	public void setImage(Image image) {
+		Image tmpImage = null;
+		tmpImage = ImageUtils.INSTANCE.ImageScale(image, labelImage.getSize().x, labelImage.getSize().y);
+		labelImage.setImage(tmpImage);
 	}
 
 }

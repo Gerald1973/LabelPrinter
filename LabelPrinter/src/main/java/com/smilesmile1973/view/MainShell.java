@@ -22,10 +22,12 @@ public class MainShell {
 	private OleClientSite clientSite;
 	private final MainController mainController;
 	private final ToolBar toolBar;
+	private final Display display;
+	final Shell shell;
 
 	public MainShell() {
-		Display display = new Display();
-		final Shell shell = new Shell(display);
+		display = new Display();
+		shell = new Shell(display);
 		GridLayout gridLayout = new GridLayout();
 		shell.setLayout(gridLayout);
 		toolBar = new ToolBar(shell, SWT.FLAT | SWT.WRAP | SWT.RIGHT);
@@ -65,5 +67,13 @@ public class MainShell {
 				display.sleep();
 		}
 		display.dispose();
+	}
+
+	public Shell getShell() {
+		return shell;
+	}
+
+	public Display getDisplay() {
+		return display;
 	}
 }

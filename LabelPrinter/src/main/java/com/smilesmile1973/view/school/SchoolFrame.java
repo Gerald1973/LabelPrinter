@@ -62,4 +62,8 @@ public class SchoolFrame {
 		}
 		return result;
 	}
+
+	public static Shell getShell() {
+		return shell;
+	}
 }

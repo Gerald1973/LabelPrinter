@@ -9,6 +9,7 @@ public class SchoolModel {
 	private String cancel;
 	private String insert;
 	private String browse;
+	private String setTitleBrowse;
 
 	public String getShellTitle() {
 		return shellTitle;
@@ -73,6 +74,17 @@ public class SchoolModel {
 	public void setBrowse(String browse) {
 		this.browse = browse;
 	}
-	
-	
+
+	public void setTitleBrowse(String string) {
+		this.setTitleBrowse = string;
+	}
+
+	public String getSetTitleBrowse() {
+		return setTitleBrowse;
+	}
+
+	public void setSetTitleBrowse(String setTitleBrowse) {
+		this.setTitleBrowse = setTitleBrowse;
+	}
+
 }
