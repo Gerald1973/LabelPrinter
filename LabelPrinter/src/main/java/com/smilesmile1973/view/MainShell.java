@@ -1,6 +1,10 @@
 package com.smilesmile1973.view;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.ole.win32.OLE;
@@ -52,6 +56,7 @@ public class MainShell {
 		mainController = new MainController(this, application);
 		mainController.setMainShell(this);
 		mainController.setVariantApplication(application);
+		mainController.hideTaskPane();
 		itemShowLabelDialog.addListener(SWT.Selection, new Listener() {
 
 			public void handleEvent(Event arg0) {
@@ -60,7 +65,10 @@ public class MainShell {
 
 			}
 		});
-		shell.pack();
+		Rectangle rectangle = display.getPrimaryMonitor().getBounds();
+		
+		shell.setSize(rectangle.width,rectangle.height);
+		shell.setLocation(rectangle.x, rectangle.y);
 		shell.open();
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch())

@@ -104,6 +104,13 @@ public enum OleUtils {
 		result = oleAutomation.invoke(itemMethodId[0], variants);
 		return result;
 	}
+	
+	public int countElementInCollection(OleAutomation oleAutomation){
+		int result = 0;
+		Variant tmpCount = getProperty(oleAutomation, "Count");
+		result = tmpCount.getInt();
+		return result;
+	}
 
 	/**
 	 * This method return a variant by calling the method on the given
@@ -124,6 +131,15 @@ public enum OleUtils {
 		methodNames[0] = methodName;
 		int[] methodIds = oleAutomation.getIDsOfNames(methodNames);
 		result = oleAutomation.invoke(methodIds[0], variants);
+		return result;
+	}
+
+	public Variant executeMethod(OleAutomation oleAutomation, String methodName) {
+		Variant result = null;
+		String[] methodNames = new String[1];
+		methodNames[0] = methodName;
+		int[] methodIds = oleAutomation.getIDsOfNames(methodNames);
+		result = oleAutomation.invoke(methodIds[0]);
 		return result;
 	}
 

@@ -1,6 +1,7 @@
 package com.smilesmile1973.view.school;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -42,11 +43,11 @@ public class MainPanel extends Composite {
 		Image imageBrowseButton = ImageUtils.INSTANCE.loadFromInternalResources("folder-2x.png");
 		browseButton.setImage(imageBrowseButton);
 		// Image
-		labelImage = new Label(this, SWT.NONE);
+		labelImage = new Label(this, SWT.BORDER);
 		GridData labelGridData = new GridData(300, 300);
 		labelImage.setLayoutData(labelGridData);
 		labelImage.setSize(300, 300);
-		labelImage.setText("IMAGE!!");
+		labelImage.setBackground(new Color(Display.getDefault(), 255, 255, 255));
 		// LblNom
 		GridData compositeLayout = new GridData();
 		compositeLayout.verticalAlignment = SWT.TOP;
@@ -56,25 +57,25 @@ public class MainPanel extends Composite {
 		// Firstname
 		labelFirstName = new Label(composite, SWT.NONE);
 		labelFirstName.setText(model.getFirstName());
-		inputFirstName = new Text(composite, SWT.SINGLE);
+		inputFirstName = new Text(composite, SWT.BORDER);
 		inputFirstName.setLayoutData(buildTxtLayoutData());
 		// familyname
 		labelFamilyName = new Label(composite, SWT.NONE);
 		labelFamilyName.setLayoutData(new GridData(SWT.RIGHT));
 		labelFamilyName.setText(model.getFamilyName());
-		inputFamilyName = new Text(composite, SWT.NONE);
+		inputFamilyName = new Text(composite, SWT.BORDER);
 		inputFamilyName.setLayoutData(buildTxtLayoutData());
 		// course
 		labelCourse = new Label(composite, SWT.NONE);
 		labelCourse.setText(model.getCourse());
 		labelCourse.setLayoutData(new GridData(SWT.RIGHT));
-		inputCourse = new Text(composite, SWT.NONE);
+		inputCourse = new Text(composite, SWT.BORDER);
 		inputCourse.setLayoutData(buildTxtLayoutData());
 		// class
 		labelClass = new Label(composite, SWT.NONE);
 		labelClass.setLayoutData(new GridData(SWT.RIGHT));
 		labelClass.setText(model.getRoom());
-		inputClass = new Text(composite, SWT.NONE);
+		inputClass = new Text(composite, SWT.BORDER);
 		inputClass.setLayoutData(buildTxtLayoutData());
 		// CancelButton
 		GridData cancelButtonGridData = new GridData();
@@ -127,9 +128,17 @@ public class MainPanel extends Composite {
 		return inputClass.getText();
 	}
 
+	/***
+	 * This method set and resize an image in the {@link #labelImage}
+	 * 
+	 * @param image
+	 *            the image to display and resize in the {@link #labelImage}
+	 */
 	public void setImage(Image image) {
 		Image tmpImage = null;
-		tmpImage = ImageUtils.INSTANCE.ImageScale(image, labelImage.getSize().x, labelImage.getSize().y);
+		if (image != null) {
+			tmpImage = ImageUtils.INSTANCE.ImageScale(image, labelImage.getSize().x, labelImage.getSize().y);
+		}
 		labelImage.setImage(tmpImage);
 	}
 

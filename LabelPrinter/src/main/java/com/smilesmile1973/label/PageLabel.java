@@ -64,8 +64,8 @@ public class PageLabel {
 		if (interLabelHeight > 0 && ConversionUtils.INSTANCE.cmToPoint((float) interLabelHeight) < 1) {
 			interLabelHeight = 0;
 		}
-		this.numberOfColumns = calculateNumberOfColumns(stickLabel, numberOfLabelWidth, interLabelWidth);
-		this.numberOfRows = calculateNumberOfRows(stickLabel, numberOfLabelHeight, interLabelHeight);
+		this.numberOfColumns = calculateNumberOfColumns(numberOfLabelWidth, interLabelWidth);
+		this.numberOfRows = calculateNumberOfRows(numberOfLabelHeight, interLabelHeight);
 		buildCellDimensions(numberOfRows, numberOfColumns);
 	}
 
@@ -144,7 +144,7 @@ public class PageLabel {
 		return result;
 	}
 
-	private int calculateNumberOfColumns(StickLabel stickLabel, int numberOfLabelWidth, float interLabelWidth) {
+	private int calculateNumberOfColumns(int numberOfLabelWidth, float interLabelWidth) {
 		int result = numberOfLabelWidth;
 		if (interLabelWidth != 0) {
 			result = result + numberOfLabelWidth - 1;
@@ -152,7 +152,7 @@ public class PageLabel {
 		return result;
 	}
 
-	private int calculateNumberOfRows(StickLabel stickLabel, int numberOfLabelHeight, float interLabelHeight) {
+	private int calculateNumberOfRows(int numberOfLabelHeight, float interLabelHeight) {
 		int result = numberOfLabelHeight;
 		if (interLabelHeight != 0) {
 			result = result + numberOfLabelHeight - 1;

@@ -1,5 +1,6 @@
 package com.smilesmile1973.controller.school;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Event;
@@ -33,8 +34,9 @@ public class SchoolController {
 		initListeners();
 	}
 
-	private void generateTable() {
+	private void generateTable(SchoolVO schoolVO) {
 		Document document = mainController.getWord().getActiveDocument();
+		document.clear();
 		document.setParagraphSpacingBeforeAfter(0, 0);
 		PageSetup pageSetup = document.getPageSetup();
 		pageSetup.setTopMargin(1.5f);
@@ -53,7 +55,9 @@ public class SchoolController {
 				table.setSizeOfCell(y + 1, x + 1, cells[y][x].getWidth(), cells[y][x].getHeight());
 				table.setBorderCell(y + 1, x + 1, Constants.WDLINESTYLEDASHDOT, Constants.WDLINEWIDTH025PT, border);
 				if (cells[y][x].isLabel()) {
-					table.addPictureInCell(y + 1, x + 1, schoolVO.getPathAndFileName());
+					if (StringUtils.isNotEmpty(schoolVO.getPathAndFileName())) {
+						table.addPictureInCell(y + 1, x + 1, schoolVO.getPathAndFileName());
+					}
 					table.setTextInCell(y + 1, x + 1, schoolVO.getString());
 				}
 			}
@@ -67,7 +71,8 @@ public class SchoolController {
 				schoolVO.setFirstName(schoolFrame.getFirstNameValue());
 				schoolVO.setName(schoolFrame.getFamilyNameValue());
 				schoolVO.setRoom(schoolFrame.getRoomValue());
-				generateTable();
+				generateTable(schoolVO);
+				schoolFrame.dispose();
 			}
 		});
 
@@ -85,8 +90,12 @@ public class SchoolController {
 				fileDialog.setFilterPath(System.getProperty("user.home"));
 				String selected = fileDialog.open();
 				schoolVO.setPathAndFileName(selected);
-				Image image = new Image(mainController.getMainShell().getDisplay(),schoolVO.getPathAndFileName());
-				schoolFrame.getMainPanel().setImage(image);
+				if (StringUtils.isNotEmpty(selected)) {
+					Image image = new Image(mainController.getMainShell().getDisplay(), schoolVO.getPathAndFileName());
+					schoolFrame.getMainPanel().setImage(image);
+				} else {
+					schoolFrame.getMainPanel().setImage(null);
+				}
 			}
 		});
 

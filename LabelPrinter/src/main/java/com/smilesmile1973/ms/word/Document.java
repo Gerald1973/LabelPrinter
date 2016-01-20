@@ -78,4 +78,9 @@ public class Document extends AbstractOleWordObject<Word> {
 		OleUtils.INSTANCE.setProperty(paragraphFormat.getAutomation(), "SpaceBefore", new Variant(spaceBefore));
 		OleUtils.INSTANCE.setProperty(paragraphFormat.getAutomation(), "SpaceAfter", new Variant(spaceAfter));
 	}
+	
+	public void clear(){
+		Variant range = OleUtils.INSTANCE.executeMethod(getMyVariant().getAutomation(), "Range",null);
+		OleUtils.INSTANCE.executeMethod(range.getAutomation(), "Delete");
+	}
 }

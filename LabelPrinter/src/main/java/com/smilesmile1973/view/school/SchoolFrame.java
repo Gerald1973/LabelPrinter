@@ -12,7 +12,7 @@ public class SchoolFrame {
 	private final MainPanel mainPanel;
 
 	public SchoolFrame(SchoolModel model) {
-		shell = new Shell(SWT.SHELL_TRIM & ~SWT.RESIZE);
+		shell = new Shell((SWT.SHELL_TRIM | SWT.APPLICATION_MODAL) & ~SWT.RESIZE);
 		shell.setText(model.getShellTitle());
 		shell.setLayout(new GridLayout());
 		mainPanel = new MainPanel(shell, SWT.NONE, model);
