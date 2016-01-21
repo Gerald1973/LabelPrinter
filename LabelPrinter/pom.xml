@@ -2,16 +2,15 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>smilesmile1973.com</groupId>
-	<artifactId>TestSwt</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>TestSwt</name>
-	<description>SWT Learning</description>
+	<artifactId>LabelPrinter</artifactId>
+	<version>0.0.2-SNAPSHOT</version>
+	<name>LabelPrinter</name>
+	<description>Application to generate labels for Word.</description>
 	<properties>
 		<swt.version>4.5.1</swt.version>
 		<commons.lang.version>3.4</commons.lang.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-
 
 	<repositories>
 		<repository>

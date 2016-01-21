@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -96,8 +97,12 @@ public class MainShell {
 	public void addShowLabelDialogListener(Listener listener) {
 		itemShowLabelDialog.addListener(SWT.Selection, listener);
 	}
-	
-	public void addShowSaveSaveDialog(Listener listener){
+
+	public void addShowSaveSaveDialog(Listener listener) {
 		itemSave.addListener(SWT.Selection, listener);
+	}
+
+	public void addDisposeListener(DisposeListener disposeListener) {
+		getShell().addDisposeListener(disposeListener);
 	}
 }

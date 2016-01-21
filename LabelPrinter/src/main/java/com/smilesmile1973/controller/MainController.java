@@ -1,5 +1,7 @@
 package com.smilesmile1973.controller;
 
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.ole.win32.Variant;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
@@ -21,7 +23,7 @@ public class MainController {
 		setVariantApplication(variantApplication);
 		word = new Word(variantApplication);
 		initListener();
-		
+
 	}
 
 	private void initListener() {
@@ -37,11 +39,18 @@ public class MainController {
 				openSchoolFrame();
 			}
 		});
-		
+
 		getMainShell().addShowSaveSaveDialog(new Listener() {
-			
+
 			public void handleEvent(Event event) {
 				getWord().showDialog(Constants.WDDIALOGFILESAVEAS);
+			}
+		});
+
+		getMainShell().addDisposeListener(new DisposeListener() {
+
+			public void widgetDisposed(DisposeEvent e) {
+				getWord().dispose();
 			}
 		});
 

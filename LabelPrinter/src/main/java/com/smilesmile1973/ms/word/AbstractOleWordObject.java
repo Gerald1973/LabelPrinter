@@ -9,6 +9,10 @@ public abstract class AbstractOleWordObject<P> {
 	public P getParent() {
 		return parent;
 	}
+	
+	public void dispose(){
+		myVariant.dispose();
+	}
 
 	protected void setParent(P parent) {
 		this.parent = parent;
@@ -26,5 +30,7 @@ public abstract class AbstractOleWordObject<P> {
 		setParent(parent);
 		setMyVariant(myVariant);
 	}
+	
+	
 	
 }
