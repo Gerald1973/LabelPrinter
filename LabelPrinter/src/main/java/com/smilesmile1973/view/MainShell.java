@@ -18,6 +18,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 
+import com.smilesmile1973.I18NUtils;
+import com.smilesmile1973.ImageUtils;
 import com.smilesmile1973.OleUtils;
 import com.smilesmile1973.controller.MainController;
 
@@ -27,7 +29,10 @@ public class MainShell {
 	private final MainController mainController;
 	private final ToolBar toolBar;
 	private final Display display;
+	private final Variant application;
 	final Shell shell;
+	ToolItem itemPrint;
+	ToolItem itemShowLabelDialog;
 
 	public MainShell() {
 		display = new Display();
@@ -39,7 +44,10 @@ public class MainShell {
 		gridDataToolBar.horizontalAlignment = SWT.FILL;
 		gridDataToolBar.grabExcessHorizontalSpace = true;
 		toolBar.setLayoutData(gridDataToolBar);
-		ToolItem itemShowLabelDialog = new ToolItem(toolBar, SWT.PUSH);
+		itemPrint = new ToolItem(toolBar, SWT.PUSH);
+		itemPrint.setImage(ImageUtils.INSTANCE.loadFromInternalResources("print-2x.png"));
+		itemPrint.setToolTipText(I18NUtils.INSTANCE.getString("mainshell.print"));
+		itemShowLabelDialog = new ToolItem(toolBar, SWT.PUSH);
 		itemShowLabelDialog.setText("Open label creator");
 		wordFrame = new OleFrame(shell, SWT.NONE);
 		GridData gridDataWordFrame = new GridData();
@@ -52,22 +60,13 @@ public class MainShell {
 		wordFrame.setLayoutData(gridDataWordFrame);
 		clientSite = new OleClientSite(wordFrame, SWT.NONE, "Word.Document");
 		clientSite.doVerb(OLE.OLEIVERB_INPLACEACTIVATE);
-		Variant application = OleUtils.INSTANCE.getWordApplication(clientSite);
+		application = OleUtils.INSTANCE.getWordApplication(clientSite);
 		mainController = new MainController(this, application);
 		mainController.setMainShell(this);
 		mainController.setVariantApplication(application);
 		mainController.hideTaskPane();
-		itemShowLabelDialog.addListener(SWT.Selection, new Listener() {
-
-			public void handleEvent(Event arg0) {
-				System.out.println("TEST");
-				mainController.openSchoolFrame();
-
-			}
-		});
 		Rectangle rectangle = display.getPrimaryMonitor().getBounds();
-		
-		shell.setSize(rectangle.width,rectangle.height);
+		shell.setSize(rectangle.width, rectangle.height);
 		shell.setLocation(rectangle.x, rectangle.y);
 		shell.open();
 		while (!shell.isDisposed()) {
@@ -83,5 +82,13 @@ public class MainShell {
 
 	public Display getDisplay() {
 		return display;
+	}
+
+	public void addPrintListener(Listener listener) {
+		itemPrint.addListener(SWT.Selection, listener);
+	}
+
+	public void addShowLabelDialogListener(Listener listener) {
+		itemShowLabelDialog.addListener(SWT.Selection, listener);
 	}
 }

@@ -32,7 +32,7 @@ public class Document extends AbstractOleWordObject<Word> {
 		tableVariants[0] = range;
 		tableVariants[1] = new Variant(numberOfRow);
 		tableVariants[2] = new Variant(numberOfColumn);
-		OleUtils.INSTANCE.executeMethod(tables.getAutomation(), "Add", tableVariants); 
+		OleUtils.INSTANCE.executeMethod(tables.getAutomation(), "Add", tableVariants);
 	}
 
 	/**
@@ -73,14 +73,22 @@ public class Document extends AbstractOleWordObject<Word> {
 	 *            the number of points after.
 	 */
 	public void setParagraphSpacingBeforeAfter(int spaceBefore, int spaceAfter) {
-		Variant range = OleUtils.INSTANCE.executeMethod(getMyVariant().getAutomation(), "Range",null);
+		Variant range = OleUtils.INSTANCE.executeMethod(getMyVariant().getAutomation(), "Range", null);
 		Variant paragraphFormat = OleUtils.INSTANCE.getProperty(range.getAutomation(), "ParagraphFormat");
 		OleUtils.INSTANCE.setProperty(paragraphFormat.getAutomation(), "SpaceBefore", new Variant(spaceBefore));
 		OleUtils.INSTANCE.setProperty(paragraphFormat.getAutomation(), "SpaceAfter", new Variant(spaceAfter));
 	}
-	
-	public void clear(){
-		Variant range = OleUtils.INSTANCE.executeMethod(getMyVariant().getAutomation(), "Range",null);
+
+	public void clear() {
+		Variant range = OleUtils.INSTANCE.executeMethod(getMyVariant().getAutomation(), "Range", null);
 		OleUtils.INSTANCE.executeMethod(range.getAutomation(), "Delete");
+	}
+
+	public void printPreview() {
+		OleUtils.INSTANCE.executeMethod(getMyVariant().getAutomation(), "PrintPreview");
+	}
+	
+	public void printOut() {
+		OleUtils.INSTANCE.executeMethod(getMyVariant().getAutomation(), "PrintOut");
 	}
 }

@@ -37,6 +37,7 @@ public class SchoolController {
 
 	private void generateTable(SchoolVO schoolVO) {
 		Document document = mainController.getWord().getActiveDocument();
+		document.getActiveWindow().getView().setShowDrawings(true);
 		document.clear();
 		document.setParagraphSpacingBeforeAfter(0, 0);
 		PageSetup pageSetup = document.getPageSetup();

@@ -7,10 +7,10 @@ import org.eclipse.swt.ole.win32.Variant;
 
 import com.smilesmile1973.OleUtils;
 
-public class Window extends AbstractOleWordObject<Document>{
-	
+public class Window extends AbstractOleWordObject<Document> {
+
 	public Window(Document parent, Variant myVariant) {
-		super(parent,myVariant);
+		super(parent, myVariant);
 	}
 
 	public List<Pane> getPanes() {
@@ -24,10 +24,15 @@ public class Window extends AbstractOleWordObject<Document>{
 		}
 		return results;
 	}
-	
-	public Selection getSelection(){
+
+	public Selection getSelection() {
 		Variant tmp = OleUtils.INSTANCE.getProperty(getMyVariant().getAutomation(), "Selection");
 		return new Selection(this, tmp);
+	}
+
+	public View getView() {
+		Variant tmp = OleUtils.INSTANCE.getProperty(getMyVariant().getAutomation(), "View");
+		return new View(this, tmp);
 	}
 
 }

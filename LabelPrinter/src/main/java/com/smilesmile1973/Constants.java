@@ -119,4 +119,6 @@ public class Constants {
 	public static final int WDRELATIVEVERTICALPOSITIONINNERMARGINAREA = 6;
 	public static final int WDRELATIVEVERTICALPOSITIONOUTERMARGINAREA = 7;
 	public static final int WDRELATIVEVERTICALPOSITIONTOPMARGINAREA = 4;
+	//wdDialog
+	public static final int WDDIALOGFILEPRINT = 88;
 }
