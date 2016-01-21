@@ -19,11 +19,9 @@ public class Word extends AbstractOleWordObject<Object> {
 		return result;
 	}
 
-	public void showPrintDialog(int wdDialogConstants) {
-
+	public void showDialog(int wdDialogConstants) {
 		Variant dialogs = OleUtils.INSTANCE.getProperty(getMyVariant().getAutomation(), "Dialogs");
 		Variant dialog = OleUtils.INSTANCE.getElementInCollection(dialogs.getAutomation(), wdDialogConstants);
 		OleUtils.INSTANCE.executeMethod(dialog.getAutomation(), "Show");
-		// OleUtils.INSTANCE.printAllFunc(getMyVariant().getAutomation());
 	}
 }

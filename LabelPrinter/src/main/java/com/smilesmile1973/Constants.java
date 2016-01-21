@@ -121,4 +121,5 @@ public class Constants {
 	public static final int WDRELATIVEVERTICALPOSITIONTOPMARGINAREA = 4;
 	//wdDialog
 	public static final int WDDIALOGFILEPRINT = 88;
+	public static final int WDDIALOGFILESAVEAS = 84;
 }

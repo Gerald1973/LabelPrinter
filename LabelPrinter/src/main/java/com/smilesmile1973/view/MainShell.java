@@ -31,8 +31,9 @@ public class MainShell {
 	private final Display display;
 	private final Variant application;
 	final Shell shell;
-	ToolItem itemPrint;
-	ToolItem itemShowLabelDialog;
+	private ToolItem itemPrint;
+	private ToolItem itemShowLabelDialog;
+	private ToolItem itemSave;
 
 	public MainShell() {
 		display = new Display();
@@ -44,6 +45,10 @@ public class MainShell {
 		gridDataToolBar.horizontalAlignment = SWT.FILL;
 		gridDataToolBar.grabExcessHorizontalSpace = true;
 		toolBar.setLayoutData(gridDataToolBar);
+		itemSave = new ToolItem(toolBar, SWT.PUSH);
+		itemSave.setImage(ImageUtils.INSTANCE.loadFromInternalResources("data-transfer-upload-2x.png"));
+		itemSave.setToolTipText(I18NUtils.INSTANCE.getString("mainshell.save"));
+
 		itemPrint = new ToolItem(toolBar, SWT.PUSH);
 		itemPrint.setImage(ImageUtils.INSTANCE.loadFromInternalResources("print-2x.png"));
 		itemPrint.setToolTipText(I18NUtils.INSTANCE.getString("mainshell.print"));
@@ -90,5 +95,9 @@ public class MainShell {
 
 	public void addShowLabelDialogListener(Listener listener) {
 		itemShowLabelDialog.addListener(SWT.Selection, listener);
+	}
+	
+	public void addShowSaveSaveDialog(Listener listener){
+		itemSave.addListener(SWT.Selection, listener);
 	}
 }

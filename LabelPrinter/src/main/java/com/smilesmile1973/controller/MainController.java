@@ -28,14 +28,20 @@ public class MainController {
 		getMainShell().addPrintListener(new Listener() {
 
 			public void handleEvent(Event event) {
-				Document document = getWord().getActiveDocument();
-				getWord().showPrintDialog(Constants.WDDIALOGFILEPRINT);
+				getWord().showDialog(Constants.WDDIALOGFILEPRINT);
 			}
 		});
 
 		getMainShell().addShowLabelDialogListener(new Listener() {
 			public void handleEvent(Event event) {
 				openSchoolFrame();
+			}
+		});
+		
+		getMainShell().addShowSaveSaveDialog(new Listener() {
+			
+			public void handleEvent(Event event) {
+				getWord().showDialog(Constants.WDDIALOGFILESAVEAS);
 			}
 		});
 
